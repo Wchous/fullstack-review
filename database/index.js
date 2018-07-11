@@ -7,10 +7,10 @@ db.once('open', function(){
 });
 
 let repoSchema = mongoose.Schema({
-  git_name: String, 
-  git_url: String,
-  git_id: Number,
-  git_stargazers_count: Number 
+  name: String, 
+  url: String,
+  id: Number,
+  stars: Number 
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
@@ -41,16 +41,16 @@ let save = ((err, gitObj) => {
   })
 })
 
-let storeRepo = callback => {
+let sortGitRepos = callback => {
   Repo.find((err,repo) => {
     if(err){
       console.log(err)
     }else{
       callback(repo)
     }
-  }).limit(25)
+  }).limit(25).sort({stars: 1})
 }
 
 
-module.exports.storeRepo = storeRepo;
+module.exports.sortGitRepos = sortGitRepos;
 module.exports.save = save;
