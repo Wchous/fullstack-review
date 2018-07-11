@@ -32,13 +32,25 @@ let save = ((err, gitObj) => {
   
   gitRepo.save(err => {
     if(err){
-      return console.log('HEY you just got an error in the DB '+ err)
-    }else{
-      let repoArray = [];
-      repoArray.push(gitRepo)
+      onsole.log('HEY you just got an error in the DB '+ err)
     }
+    // else{
+    //   let repoArray = [];
+    //   repoArray.push(gitRepo)
+    // }
   })
 })
-  
 
+let storeRepo = callback => {
+  Repo.find((err,repo) => {
+    if(err){
+      console.log(err)
+    }else{
+      callback(repo)
+    }
+  }).limit(25)
+}
+
+
+module.exports.storeRepo = storeRepo;
 module.exports.save = save;
