@@ -20,7 +20,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Grim Repo</h1>
+      <h1>☠ The Grim Repo ☠</h1>
       <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)

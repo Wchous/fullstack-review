@@ -1,6 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
-const db = require('../database/index.js');
+const database = require('../database/index.js');
 
 let getReposByUsername = (username, callback) => {
   // TODO - Use the request module to request repos for a specific
@@ -18,7 +18,7 @@ let getReposByUsername = (username, callback) => {
 
   request.get(options, (err, gitObject) => {
     if(err){
-      console.log('there was an issure in your request here: ' + err)
+      console.log(`there was an issure in your helper: ${err}`)
     }else{
       console.log(gitObject.body)
       callback(gitObject)

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
-db.on('error', console.error.bind(console, `HEY there's a connection error`));
-db.once('open', function(){
-  console.log('Success w/ DB connection')
-});
+// db.on('error', console.error.bind(console, `HEY there's a connection error`));
+// db.once('open', function(){
+//   console.log('Success w/ DB connection')
+// });
 
 let repoSchema = mongoose.Schema({
   name: String, 
@@ -32,7 +32,7 @@ let save = ((err, gitObj) => {
   
   gitRepo.save(err => {
     if(err){
-      onsole.log('HEY you just got an error in the DB '+ err)
+      console.log(`HEY you just got an error in the DB ${err}`)
     }
     // else{
     //   let repoArray = [];
@@ -41,16 +41,16 @@ let save = ((err, gitObj) => {
   })
 })
 
-let sortGitRepos = callback => {
+let getGitRepos = callback => {
   Repo.find((err,repo) => {
     if(err){
-      console.log(err)
+      console.log(err, null)
     }else{
-      callback(repo)
+      callback(null, repo)
     }
   }).limit(25).sort({stars: 1})
 }
 
 
-module.exports.sortGitRepos = sortGitRepos;
+module.exports.getGitRepos = getGitRepos;
 module.exports.save = save;
