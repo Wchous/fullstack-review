@@ -15,23 +15,26 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.post('/repos', (req, res) => {
   console.log(`You're in the post function of your server index!`)
  
-  let username = req.body.data;
-  return github.getReposByUsername(username)
-    .then((repos) => {
+  let username = req.body.data; 
+
+  return helper.getReposByUsername(username)
+    .then((repo) => {
       repos.forEach((repo) => {
-        db.save(newRepoObj);
+        database.save(newRepoObj);
       });
     }); 
 });
-
-
-
 
 app.get('/repos', function (req, res) {
 
   console.log(`You're in the get function of your server index!`)
 
-  db.fetch((error, repos) => {
+  // use getGitRepo?
+  // Save.getGitRepos(function(repo) {
+  //   res.json(repo)
+  // })
+
+  database.fetch((error, repos) => {
     if (error) {
       console.log(error);
     } else {

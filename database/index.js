@@ -34,10 +34,10 @@ let save = ((err, gitObj) => {
     if(err){
       console.log(`HEY you just got an error in the DB ${err}`)
     }
-    // else{
-    //   let repoArray = [];
-    //   repoArray.push(gitRepo)
-    // }
+    else{
+      let repoArray = [];
+      repoArray.push(gitRepo)
+    }
   })
 })
 
