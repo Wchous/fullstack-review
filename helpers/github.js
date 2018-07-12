@@ -1,8 +1,7 @@
 const request = require('request');
 const config = require('../config.js');
-const Promise = require('bluebird');
 
-let getReposByUsername = (username) => {
+let getReposByUsername = (username, callback) => {
   // TODO - Use the request module to request repos for a specific
   // user from the github API
 
@@ -18,18 +17,9 @@ let getReposByUsername = (username) => {
       'Authorization': `token ${config.TOKEN}`
     }
   } 
-  return new Promise((reject,resolve) => {
-    request.get(options, (err, res, body) => {
-      if(err){
-        console.log(`there was an issure in your helper: ${err}`)
-        reject(err)
-      } else if (body.message) {
-        reject(new Error('failed to find git username'))
-      }else { 
-       resolve(JSON.parse(body))
-      }
-    })
-  })
+  // return new Promise((reject,resolve) => {
+  return request.get(options, callback) 
+  // })
 }
 
 module.exports.getReposByUsername = getReposByUsername;

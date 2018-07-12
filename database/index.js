@@ -17,7 +17,7 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 let save = ((err, gitObj) => {
 
-  let parsedObj = JSON.parse(gitObj.body)
+  let parsedObj = JSON.parse(gitObj)
 
   for(let i = 0; i<parsedObj.length; i++){
     let returnObj = {};

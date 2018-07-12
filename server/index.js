@@ -17,12 +17,23 @@ app.post('/repos', (req, res) => {
  
   let username = req.body.data; 
 
-  return helper.getReposByUsername(username)
-    .then((repo) => {
-      repos.forEach((repo) => {
-        database.save(newRepoObj);
-      });
-    }); 
+  let callback = (err,res,body)=>{
+    console.log('Youre in the callback var!!!!!!')
+    if(err){
+      console.log(err)
+    }
+    else if(body){
+      console.log(body)
+      database.save(body)
+    }else{
+      console.log(res)
+      res.status(500)
+    }
+    res.end()
+  };
+
+  helper.getReposByUsername(username, callback)
+    
 });
 
 app.get('/repos', function (req, res) {
@@ -30,17 +41,17 @@ app.get('/repos', function (req, res) {
   console.log(`You're in the get function of your server index!`)
 
   // use getGitRepo?
-  // Save.getGitRepos(function(repo) {
-  //   res.json(repo)
-  // })
+  database.getGitRepos(function(repo) {
+    res.json(repo)
+  })
 
-  database.fetch((error, repos) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(repos);
-    }
-  });
+  // database.fetch((error, repos) => {
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     console.log(repos);
+  //   }
+  // });
 })
 
 let port = 1128;
