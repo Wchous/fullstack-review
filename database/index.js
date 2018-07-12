@@ -17,9 +17,11 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 let save = ((err, gitObj) => {
 
+  console.log(`HEYYYYYYY it's the ${gitObj}!!!!!!!!!`)
   let parsedObj = JSON.parse(gitObj)
 
   for(let i = 0; i<parsedObj.length; i++){
+    console.log(`HEYYYYYYYYYY it's the parsedObj ${parsedObj}`)
     let returnObj = {};
 
     returnObj.name = parsedObj[i].name
@@ -27,8 +29,8 @@ let save = ((err, gitObj) => {
     returnObj.id = parsedObj[i].owner.id
     returnObj.stars = parsedObj[i].stargazers_count  
   }
-
-  let gitRepo = new Repo(returnObj)
+  console.log(`HEYYYYYYYYYY it's the returnObj after the for loop ${returnObj}`)
+  let gitRepo = new Repo(returnOb)
   
   gitRepo.save(err => {
     if(err){

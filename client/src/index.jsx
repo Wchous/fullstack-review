@@ -11,7 +11,7 @@ class App extends React.Component {
       repos: []
     }
   }
-  
+
 componentDidMount(){
   console.log('Mounting Components!!!!')
   $.get("/repos", function(reposArray) {
@@ -39,7 +39,7 @@ componentDidMount(){
 
   render () {
     return (<div>
-      <h1>☠ The Grim Repo ☠</h1>
+      <h1>☠☠</h1>
       <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)

@@ -23,8 +23,8 @@ app.post('/repos', (req, res) => {
       console.log(err)
     }
     else if(body){
-      console.log(body)
-      database.save(body)
+      console.log(`HEYYYYYYYYY in the body of Callback ${body}`)
+      database.save(err, body)
     }else{
       console.log(res)
       res.status(500)
