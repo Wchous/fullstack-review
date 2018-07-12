@@ -10,12 +10,31 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-
   }
+  
+componentDidMount(){
+  console.log('Mounting Components!!!!')
+  $.get("/repos", function(reposArray) {
+    console.log(reposArray)
+  })
+  .done(reposArray => {
+    this.setState({
+      repos: reposArray,
+    });
+  }); 
+
+}
 
   search (term) {
-    console.log(`${term} was searched`);
-    // TODO
+    console.log(`${term}`);
+    $.ajax({
+      method: "POST",
+      url: "/repos",
+      data: {data: term}
+    })
+  .done(function(res) {
+    console.log( "Data Saved: " + res );
+  });
   }
 
   render () {
