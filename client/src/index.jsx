@@ -24,7 +24,6 @@ componentDidMount(){
   }); 
 
 }
-
   search (term) {
     console.log(`${term}`);
     $.ajax({

@@ -29,11 +29,11 @@ app.post('/repos', (req, res) => {
       console.log(res)
       res.status(500)
     }
-    res.end()
   };
 
   helper.getReposByUsername(username, callback)
-    
+
+  res.end()  
 });
 
 app.get('/repos', function (req, res) {

@@ -16,31 +16,24 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = ((err, gitObj) => {
+  
+  console.log(`HEYYYYYYY it's the GITOBJ ${gitObj}!!!!!!!!!`)
+  let parsedObj = gitObj
 
-  console.log(`HEYYYYYYY it's the ${gitObj}!!!!!!!!!`)
-  let parsedObj = JSON.parse(gitObj)
-
+  let returnObj = {};
   for(let i = 0; i<parsedObj.length; i++){
     console.log(`HEYYYYYYYYYY it's the parsedObj ${parsedObj}`)
-    let returnObj = {};
+    
 
     returnObj.name = parsedObj[i].name
     returnObj.url = parsedObj[i].url
-    returnObj.id = parsedObj[i].owner.id
+    returnObj.id = parsedObj[i].id
     returnObj.stars = parsedObj[i].stargazers_count  
   }
   console.log(`HEYYYYYYYYYY it's the returnObj after the for loop ${returnObj}`)
-  let gitRepo = new Repo(returnOb)
+  let gitRepo = new Repo(returnObj)
   
-  gitRepo.save(err => {
-    if(err){
-      console.log(`HEY you just got an error in the DB ${err}`)
-    }
-    else{
-      let repoArray = [];
-      repoArray.push(gitRepo)
-    }
-  })
+  gitRepo.save()
 })
 
 let getGitRepos = callback => {
